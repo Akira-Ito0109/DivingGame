@@ -5,19 +5,25 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject playerObj;
+    private PlayerScript playerController;
+
     private Vector3 offset;
 
     private void Start()
     {
-        offset = transform.position - playerObj.transform.position;
+        offset = transform.position - playerController.transform.position;
     }
 
     private void Update()
     {
-        if(playerObj !=null)
+        if (playerController.inWater==true)
         {
-            transform.position = playerObj.transform.position + offset;
+            return;
+        }
+
+        if(playerController != null)
+        {
+            transform.position = playerController.transform.position + offset;
         }
     }
 }
