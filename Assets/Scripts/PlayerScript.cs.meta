@@ -3,7 +3,10 @@ guid: c811fb24d5847b9479b2a39684dc71fd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - splashEffectPrefab: {fileID: 1722726733478836, guid: c1c88308ebb5d2541a282905b854ee4c,
+      type: 3}
+  - splashSE: {fileID: 8300000, guid: 527ba8996f591d448b639061429ca0d0, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
