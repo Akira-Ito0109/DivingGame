@@ -15,6 +15,14 @@ public class PlayerScript : MonoBehaviour
     [Header("着水判定用。trueなら着水済")]
     public bool inWater;
 
+    public enum AttitudeType
+    {
+        Straight,Prone
+    }
+
+    [Header("現在のキャラの姿勢")]
+    public AttitudeType attitudeType;
+
     private Rigidbody rb;
 
     private float x;
@@ -25,7 +33,7 @@ public class PlayerScript : MonoBehaviour
 
     private int score;
 
-
+    private Vector3 proneRotation = new Vector3(-90, 0, 0);
 
     [SerializeField, Header("水しぶきのエフェクト")]
     private GameObject waterEffectPrefab = null;
@@ -42,8 +50,9 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
 
-        transform.eulerAngles = straightRotation;  
+        transform.eulerAngles = straightRotation;
 
+        attitudeType = AttitudeType.Straight;
 
     }
 
@@ -97,5 +106,36 @@ public class PlayerScript : MonoBehaviour
         transform.DOMoveY(4.7f, 1.0f);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ChangeAttitude();
+        }
+    }
 
+    private void ChangeAttitude()
+    {
+        switch(attitudeType)
+        {
+            case AttitudeType.Straight:
+                attitudeType = AttitudeType.Prone;
+
+                transform.DORotate(proneRotation, 0.25f, RotateMode.WorldAxisAdd);
+
+                rb.drag = 25.0f;
+
+                break;
+
+            case AttitudeType.Prone:
+
+                attitudeType = AttitudeType.Straight;
+
+                transform.DORotate(straightRotation, 0.25f);
+
+                rb.drag = 0f;
+
+                break;
+        }
+    }
 }
