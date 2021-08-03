@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject Goal;
+
+    [SerializeField]
+    private Text txtDistance;
 
     private float distance;
 
@@ -23,6 +27,8 @@ public class GameManager : MonoBehaviour
             distance = 0;
         }
 
-        Debug.Log(distance);
+        //Debug.Log(distance);
+
+        txtDistance.text = distance.ToString("F2");
     }
 }
